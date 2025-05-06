@@ -1,0 +1,2 @@
+# TPG
+Labakie chatgpt useri
