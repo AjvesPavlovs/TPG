@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-    <title>TPGfy</title>
-</head>
-<body>
-<img href="TPGfy_logo.png" alt = "nav attela">
-</body>
+	<head>
+		<meta charset="UTF-8">
+    	<title>TPGfy</title>
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		<title>Spotify Artist Stats</title>
+	</head>
+	<body>
+		<img href="TPGfy_logo.png" alt = "nav attela">
+		<div class="container">
+    	<h1>Spotify Artist Stats</h1>
+    	<input type="text" id="artist-name" placeholder="Enter artist name">
+    	<button id="search-btn">Search</button>
+
+	    <div id="artist-info">
+	      <h2>Artist Info:</h2>
+	      <p><strong>Name:</strong> <span id="artist-name-info"></span></p>
+	      <p><strong>Followers:</strong> <span id="followers"></span></p>
+	      <p><strong>Genres:</strong> <span id="genres"></span></p>
+	      <p><strong>Popularity:</strong> <span id="popularity"></span></p>
+	
+	    </div>
+	  </div>
+	  
+	  <label for="cars">Choose a car:</label>
+
+		<select name="cars" id="cars">
+		  <option value="volvo">Volvo</option>
+		  <option value="saab">Saab</option>
+		  <option value="mercedes">Mercedes</option>
+		  <option value="audi">Audi</option>
+		</select>
+	</body>
 </html>
