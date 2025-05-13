@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "autors")
 public class Autors {
+	@Id
 	@GeneratedValue
 	private int id;
 	@NotNull
