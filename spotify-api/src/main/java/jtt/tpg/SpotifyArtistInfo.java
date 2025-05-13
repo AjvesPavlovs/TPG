@@ -72,7 +72,7 @@ public class SpotifyArtistInfo {
                     }
 
                     int popularity = artist.getInt("popularity");
-
+ 
                     // Display the artist info
                     System.out.println("Artist Name: " + artistNameInfo);
                     System.out.println("Followers: " + String.format("%,d", followersCount));
