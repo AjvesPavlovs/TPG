@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "autors")
+@Table(name = "authors")
 public class Autors {
 	@Id
 	@GeneratedValue
