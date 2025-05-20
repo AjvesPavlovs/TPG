@@ -9,7 +9,7 @@ import jtt.tpg.dto.Artist;
 //this class is made to describe queries needed for Artist entity
 
 public interface ArtistRepository extends CrudRepository<Artist, Integer>{
-	@Query("SELECT id FROM Brush b WHERE b.name = :name")
+	@Query("SELECT id FROM Artist a WHERE a.name = :name")
 	int findID(@Param("name") String name);
 	
 	@Query("SELECT a FROM Artist a WHERE a.name = :name")
