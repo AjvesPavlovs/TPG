@@ -4,5 +4,13 @@ CREATE TABLE IF NOT EXISTS spotifyapi.artists(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(255) NOT NULL,
 	followers INT NOT NULL,
-	genres VARCHAR(255) NOT NULL,
 	popularity INT NOT NULL);
+	
+	CREATE TABLE IF NOT EXISTS spotifyapi.genre(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name  VARCHAR(255) NOT NULL);
+    
+    	CREATE TABLE IF NOT EXISTS spotifyapi.artist_genres(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    artist_id INT NOT NULL,
+    genre_id INT NOT NULL);

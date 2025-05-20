@@ -11,13 +11,12 @@ import jtt.tpg.dao.ArtistDAO;
 @Controller
 public class WebController {
 	
-	@Autowired
-	ArtistDAO artistDAO;
+
 	
     @GetMapping("/")
     public String home(Model model) {
-    	String autorName = artistDAO.getByID(1).getName();
-        model.addAttribute("message", autorName);
+
+        model.addAttribute("message", "asd");
         return "index"; // Maps to index.html in templates folder
     }
 }

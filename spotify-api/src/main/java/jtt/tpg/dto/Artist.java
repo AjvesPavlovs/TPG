@@ -16,7 +16,7 @@ public class Artist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+
 	private String name;
 	private int followers;
 	private List<String> genres;
