@@ -56,7 +56,7 @@ public class Artist {
 
 	public void setPopularity(int popularity) {
 		this.popularity = popularity;
-	}
+	} 
 	
 	
 }
