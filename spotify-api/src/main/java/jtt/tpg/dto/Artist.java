@@ -16,10 +16,12 @@ public class Artist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
+	@NotNull
 	private String name;
+	@NotNull
 	private int followers;
-	private List<String> genres;
+	@NotNull
 	private int popularity;
 	
 	public Artist() {}
@@ -46,14 +48,6 @@ public class Artist {
 
 	public void setFollowers(int followers) {
 		this.followers = followers;
-	}
-
-	public List<String> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
 	}
 
 	public int getPopularity() {
