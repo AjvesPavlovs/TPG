@@ -1,14 +1,14 @@
 package jtt.tpg.dao.base;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public interface GenericDAO<T> {
+//this interface is made to save methods for all entities
 
-	T save(T value);
+public interface GenericDAO<T> {
+	T insert(T value);
 	T update(T value, int id);
 	void delete(int id);
-	T getID(T value);
+	int getID(T value);
 	T getByID(int id);
 	List<T> getAllData();
 }
