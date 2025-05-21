@@ -14,6 +14,4 @@ public interface ArtistRepository extends CrudRepository<Artist, Integer>{
 	
 	@Query("SELECT a FROM Artist a WHERE a.name = :name")
 	int findByName(@Param("name") String name);
-	
-
 }

@@ -29,11 +29,10 @@ public class SpotifyArtistInfo {
             System.out.println("Please enter an artist name");
         }
     }
-
     // Function to fetch artist info from Spotify API
     private static void getArtistStats(String artistName) {
         try {
-            // Spotify Search API endpoint
+            //Spotify Search API endpoint
             String urlString = "https://api.spotify.com/v1/search?q=" + artistName + "&type=artist";
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
