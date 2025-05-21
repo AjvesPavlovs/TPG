@@ -13,4 +13,5 @@ public interface GenreRepository extends CrudRepository<Genre, Integer>{
 	int findID(@Param("name") String name);
 	
 	@Query("SELECT a FROM Genre a WHERE a.name = :name")
+	int findByGenreName(@Param("name") String genreName);
 }

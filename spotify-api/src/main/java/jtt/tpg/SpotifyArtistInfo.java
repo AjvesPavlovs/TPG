@@ -14,7 +14,7 @@ public class SpotifyArtistInfo {
 	
     private static final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
     private static final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
-    private static final String ACCESS_TOKEN = "BQBD6LyiAQjUAKW7NTEhxXNKiK58USzgiTPrGSq58I7UyHgx7DNBhgMUn1vxC17Meh9WxnXlMb9W4oWqWTGNfIFX11eXPLW8TrOC9I85RDuIDDIB1zFVWuDTrBdfRP5vgtDpc049XrQ";
+    private static final String ACCESS_TOKEN = "BQAqcfgPb3LxYFpBRJNAmTv12holqPYkmu2_Fj2S99u4dWQuVgnXX1kOQ1q6t8dpEqYx8rIvv176efzm_Lx7kNFHm5RVcVA7O2rc44F9i1OymLYi-Oi2q7sgquKfNmOs3v7XC9iJ7KI";
 
     public static void main(String[] args) {
     	
