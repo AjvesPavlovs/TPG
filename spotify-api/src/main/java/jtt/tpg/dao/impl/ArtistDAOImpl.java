@@ -56,6 +56,12 @@ public class ArtistDAOImpl implements ArtistDAO{
 		List<Artist> artists = (List<Artist>) artistRepository.findAll();
 		return artists;
 	}
+
+	@Override
+	public Artist getByName(String name) {
+		Artist artistData = artistRepository.findById(artistRepository.findByName(name)).get();
+		return artistData;
+	}
 	
 
 

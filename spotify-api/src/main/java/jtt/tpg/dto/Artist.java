@@ -26,7 +26,7 @@ public class Artist {
 	
 	public Artist() {}
 
-	public Artist(String name, int followers, List<String> genres, int popularity) {
+	public Artist(String name, int followers, int popularity) {
 		this.name = name;
 	}
 	

@@ -1,20 +1,33 @@
 package jtt.tpg;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jtt.tpg.dao.ArtistDAO;
+import jtt.tpg.dto.Artist;
+
 @Controller
 public class WebController {
 	
+	@Autowired
+	ArtistDAO artistDAO;
+	
+	SpotifyArtistInfo info;
+	
     @PostMapping("/redirect")
     public String artistInfo(@RequestParam(name="action") String action,
-    		@RequestParam(name="artist-name") String username, int followers, String genres, int popularity, Model model) {
-
+    		@RequestParam(name="artist-name") String username, Model model) {
+    	
+    	Artist artist = artistDAO.getByName(username);
+    	int followers = artist.getFollowers();
+    	int popularity = artist.getPopularity();
+    	
         model.addAttribute("artist-name", username);
         model.addAttribute("followers", followers);
-        model.addAttribute("genres", genres);
+      //  model.addAttribute("genres", genres);
         model.addAttribute("popularity", popularity);
         return "index"; // Maps to index.html in templates folder
     }

@@ -16,19 +16,7 @@ public class SpotifyArtistInfo {
     private static final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
     private static final String ACCESS_TOKEN = "BQAqcfgPb3LxYFpBRJNAmTv12holqPYkmu2_Fj2S99u4dWQuVgnXX1kOQ1q6t8dpEqYx8rIvv176efzm_Lx7kNFHm5RVcVA7O2rc44F9i1OymLYi-Oi2q7sgquKfNmOs3v7XC9iJ7KI";
 
-    public static void main(String[] args) {
-    	
-        Scanner input = new Scanner(System.in);
-        
-        // Test with a sample artist name
-        String artistName = input.next() + input.nextLine();; // Replace with user input
 
-        if (artistName != null && !artistName.trim().isEmpty()) {
-            getArtistStats(artistName.trim());
-        } else {
-            System.out.println("Please enter an artist name");
-        }
-    }
     // Function to fetch artist info from Spotify API
     private static void getArtistStats(String artistName) {
         try {
