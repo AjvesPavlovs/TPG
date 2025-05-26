@@ -26,6 +26,8 @@ public class Artist {
 
 	public Artist(String name, int followers, int popularity) {
 		this.name = name;
+		this.followers = followers;
+		this.popularity = popularity;
 	}
 	
 	public int getId() {
