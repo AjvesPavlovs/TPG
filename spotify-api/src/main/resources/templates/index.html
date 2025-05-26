@@ -1,33 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<<<<<<< HEAD
-	<head>
-		<meta charset="UTF-8">
-    	<title>TPGfy</title>
-  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  		<title>Spotify Artist Stats</title>
-	</head>
-	<body>
-		<img src="TPGfy_logo.png" alt = "nav attela">
-		<div class="container">
-			<form th:action=@{/redirect} method="post">
-	    	<h1>Spotify Artist Stats</h1>
-	    		<input type="text" id="artist-name" name="artist-name" placeholder="Enter artist name">
-	    		<button type="submit" id="search-btn" name="action">Search</button>
-	
-		    <div id="artist-info">
-		      	<h2>Artist Info:</h2>
-				      <p><strong>Name:</strong> <span id="artist-name-info" th:text=${name}></span></p>
-				      <p><strong>Followers:</strong> <span id="followers" th:text=${followers}></span></p>
-				      <p><strong>Genres:</strong> <span id="genres"></span></p>
-				      <p><strong>Popularity:</strong> <span id="popularity" th:text=${popularity}></span></p>
-			
-	    	</div>	 
-	    	</form>
-	  	</div>   
-	  
-	  <label for="cars">Choose a car:</label>
-=======
 <head>
   <meta charset="UTF-8">
   <title>TPGfy</title>
@@ -35,10 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<>
   <!-- Logo in top-left -->
   <img src="TPGfy_logo.png" alt="Spotify Logo" class="logo" />
->>>>>>> branch 'main' of https://github.com/AjvesPavlovs/TPG.git
 
   <div class="container">
     <form th:action="@{/redirect}" method="post">
