@@ -1,5 +1,7 @@
 package jtt.tpg;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,14 @@ public class WebController {
 	@Autowired
 	ArtistDAO artistDAO;
 	
-	SpotifyArtistInfo info;
+	
 	
     @PostMapping("/redirect")
     public String artistInfo(@RequestParam(name="action") String action,
-    		@RequestParam(name="artist-name") String username, Model model) {
+    		@RequestParam(name="artist-name") String username, Model model) throws IOException {
+    	SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
     	
-    	Artist artist = artistDAO.getByName(username);
+    	Artist artist = spotifyInfo.getArtistStats(username);
     	int followers = artist.getFollowers();
     	int popularity = artist.getPopularity();
     	
