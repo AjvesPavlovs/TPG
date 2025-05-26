@@ -16,14 +16,10 @@ import org.springframework.stereotype.Component;
 import jtt.tpg.dto.Artist;
 
 public class SpotifyArtistInfo {
-	GetUserToken token;
+	GetUserToken token = new GetUserToken();;
     private final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
     private final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
-    private String accessToken = token.getTOKEN();
-
-    public SpotifyArtistInfo() throws IOException {
-    	token = new GetUserToken();
-	}
+    private String accessToken = token.getAccessToken();
 
     // Function to fetch artist info from Spotify API
     	public Artist getArtistStats(String artistName) {

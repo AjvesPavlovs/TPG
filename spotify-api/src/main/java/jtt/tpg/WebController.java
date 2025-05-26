@@ -25,10 +25,12 @@ public class WebController {
     	SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
     	
     	Artist artist = spotifyInfo.getArtistStats(username);
+    	System.out.println(artist.getName());
+    	System.out.println(artist.getFollowers());
     	int followers = artist.getFollowers();
     	int popularity = artist.getPopularity();
     	
-        model.addAttribute("artist-name", username);
+        model.addAttribute("artist-name2", username);
         model.addAttribute("followers", followers);
       //  model.addAttribute("genres", genres);
         model.addAttribute("popularity", popularity);
