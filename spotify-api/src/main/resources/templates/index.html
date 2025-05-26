@@ -9,19 +9,20 @@
 	<body>
 		<img src="TPGfy_logo.png" alt = "nav attela">
 		<div class="container">
-    	<h1>Spotify Artist Stats</h1>
-    	<input type="text" id="artist-name" placeholder="Enter artist name">
-    	<button id="search-btn">Search</button>
-
-	    <div id="artist-info">
-	      <h2>Artist Info:</h2>
-	      <p><strong>Name:</strong> <span id="artist-name-info"></span></p>
-	      <p><strong>Followers:</strong> <span id="followers"></span></p>
-	      <p><strong>Genres:</strong> <span id="genres"></span></p>
-	      <p><strong>Popularity:</strong> <span id="popularity"></span></p>
+			<form th:action=@{/redirect} method="post">
+	    	<h1>Spotify Artist Stats</h1>
+	    		<input type="text" id="artist-name" name="artirst-name" th:text=${name} placeholder="Enter artist name">
+	    		<button id="search-btn">Search</button>
 	
-	    </div>
-	  </div>   
+		    <div id="artist-info">
+		      	<h2>Artist Info:</h2>
+				      <p><strong>Name:</strong> <span id="artist-name-info"></span></p>
+				      <p><strong>Followers:</strong> <span id="followers"></span></p>
+				      <p><strong>Genres:</strong> <span id="genres"></span></p>
+				      <p><strong>Popularity:</strong> <span id="popularity"></span></p>
+			</form>
+	    	</div>
+	  	</div>   
 	  
 	  <label for="cars">Choose a car:</label>
 
