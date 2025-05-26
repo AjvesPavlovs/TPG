@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-    	<title>TPGfy</title>
-  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  		<title>Spotify Artist Stats</title>
-	</head>
-	<body>
-		<img src="TPGfy_logo.png" alt = "nav attela">
-		<div class="container">
-			<form th:action=@{/redirect} method="post">
-	    	<h1>Spotify Artist Stats</h1>
-	    		<input type="text" id="artist-name" name="artist-name" th:text=${name} placeholder="Enter artist name">
-	    		<button type="submit" id="search-btn" name="action">Search</button>
-	
-		    <div id="artist-info">
-		      	<h2>Artist Info:</h2>
-				      <p><strong>Name:</strong> <span id="artist-name-info" ></span></p>
-				      <p><strong>Followers:</strong> <span id="followers" th:text=${followers}></span></p>
-				      <p><strong>Genres:</strong> <span id="genres"></span></p>
-				      <p><strong>Popularity:</strong> <span id="popularity" th:text=${popularity}></span></p>
-			
-	    	</div>
-	    	</form>
-	  	</div>   
-	  
-	  <label for="cars">Choose a car:</label>
+<head>
+  <meta charset="UTF-8">
+  <title>TPGfy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<>
+  <!-- Logo in top-left -->
+  <img src="TPGfy_logo.png" alt="Spotify Logo" class="logo" />
 
-		<select name="cars" id="cars">
-		  <option value="volvo">Volvo</option>
-		  <option value="saab">Saab</option>
-		  <option value="mercedes">Mercedes</option>
-		  <option value="audi">Audi</option>
-		</select>
-	</body>
+  <div class="container">
+    <form th:action="@{/redirect}" method="post">
+      <h1>Spotify Artist Stats</h1>
+      <input type="text" id="artist-name" name="artist-name" th:text="${name}" placeholder="Enter artist name">
+      <button type="submit" id="search-btn" name="action">Search</button>
+    </form>
+  </div>
+
+  <div id="artist-info">
+    <h2>Artist Info:</h2>
+    <p><strong>Name:</strong> <span id="artist-name-info"></span></p>
+    <p><strong>Followers:</strong> <span id="followers" th:text="${followers}"></span></p>
+    <p><strong>Genres:</strong> <span id="genres"></span></p>
+    <p><strong>Popularity:</strong> <span id="popularity" th:text="${popularity}"></span></p>
+  </div>
+
+  <!-- Dropdown moved below artist info -->
+  <div class="dropdown-below">
+    <label for="previous-artists">Choose previous artist:</label><br />
+    <select id="previous-artists">
+      <option value="artist1">Artist 1</option>
+      <option value="artist2">Artist 2</option>
+      <option value="artist3">Artist 3</option>
+    </select>
+  </div>
+
+</body>
 </html>
