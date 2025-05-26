@@ -9,10 +9,18 @@ import java.net.URL;
 import java.util.Base64;
 
 import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 //Class is used to get Access Token, if it is expired
 
 public class GetUserToken {
+	
+	RestTemplate restTemplate = new RestTemplate();
 
 	private static final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
     private static final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
@@ -26,39 +34,26 @@ public class GetUserToken {
         }
     }
 
-    public static String getAccessToken() throws IOException {
-        String auth = CLIENT_ID + ":" + CLIENT_SECRET;
-        String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
+	private String getAccessToken() {
+	    String auth = CLIENT_ID + ":" + CLIENT_SECRET;
+	    String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
 
-        URL url = new URL("https://accounts.spotify.com/api/token");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Authorization", "Basic " + encodedAuth);
+	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        conn.setRequestProperty("Authorization", "Basic " + encodedAuth);
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        conn.setDoOutput(true);
+	    HttpEntity<String> request = new HttpEntity<>("grant_type=client_credentials", headers);
 
-        String body = "grant_type=client_credentials";
+	    ResponseEntity<String> response = restTemplate.postForEntity(
+	            "https://accounts.spotify.com/api/token",
+	            request,
+	            String.class);
 
-        try (OutputStream os = conn.getOutputStream()) {
-            os.write(body.getBytes());
-            os.flush();
-        }
-
-        if (conn.getResponseCode() == 200) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String input;
-            while ((input = in.readLine()) != null) {
-                response.append(input);
-            }
-            in.close();
-
-            JSONObject json = new JSONObject(response.toString());
-            return json.getString("access_token");
-        } else {
-            throw new IOException("Failed to get token. HTTP code: " + conn.getResponseCode());
-        }
-        
-    }
+	    if (response.getStatusCode() == HttpStatus.OK) {
+	        JSONObject json = new JSONObject(response.getBody());
+	        return json.getString("access_token");
+	    } else {
+	        throw new RuntimeException("Failed to get access token");
+	    }
+	}
 }
