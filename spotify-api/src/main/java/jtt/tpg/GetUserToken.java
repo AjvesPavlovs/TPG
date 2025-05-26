@@ -9,24 +9,26 @@ import java.net.URL;
 import java.util.Base64;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 //Class is used to get Access Token, if it is expired
-
 public class GetUserToken {
 
-	private static final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
-    private static final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
+	private final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
+    private final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
+    private String TOKEN = ""; 
     
-	public static void main(String[] args) {
-		try {
-            String accessToken = getAccessToken();
-            System.out.println("Access Token: " + accessToken);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String getAccessToken() throws IOException {
+    public GetUserToken() throws IOException {
+		getAccessToken();
+	}
+    public String getTOKEN() {
+		return TOKEN;
+	}
+	public void setTOKEN(String tOKEN) {
+		TOKEN = tOKEN;
+	}
+	public void getAccessToken() throws IOException {
         String auth = CLIENT_ID + ":" + CLIENT_SECRET;
         String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
 
@@ -55,7 +57,7 @@ public class GetUserToken {
             in.close();
 
             JSONObject json = new JSONObject(response.toString());
-            return json.getString("access_token");
+            TOKEN = json.getString("access_token");
         } else {
             throw new IOException("Failed to get token. HTTP code: " + conn.getResponseCode());
         }
