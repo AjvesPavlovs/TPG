@@ -16,10 +16,10 @@
 	
 		    <div id="artist-info">
 		      	<h2>Artist Info:</h2>
-				      <p><strong>Name:</strong> <span id="artist-name-info"></span></p>
-				      <p><strong>Followers:</strong> <span id="followers"></span></p>
+				      <p><strong>Name:</strong> <span id="artist-name-info" ></span></p>
+				      <p><strong>Followers:</strong> <span id="followers" th:text=${followers}></span></p>
 				      <p><strong>Genres:</strong> <span id="genres"></span></p>
-				      <p th:text"popularity"><strong>Popularity:</strong> <span id="popularity"></span></p>
+				      <p><strong>Popularity:</strong> <span id="popularity" th:text=${popularity}></span></p>
 			
 	    	</div>
 	    	</form>
