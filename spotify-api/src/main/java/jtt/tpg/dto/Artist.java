@@ -19,9 +19,7 @@ public class Artist {
 	
 	@NotNull
 	private String name;
-	@NotNull
 	private int followers;
-	@NotNull
 	private int popularity;
 	
 	public Artist() {}

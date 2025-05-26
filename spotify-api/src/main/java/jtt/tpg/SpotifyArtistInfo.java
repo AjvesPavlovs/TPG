@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import jtt.tpg.dto.Artist;
 
 public class SpotifyArtistInfo {
-	GetUserToken token = new GetUserToken();;
+	GetUserToken token = new GetUserToken();
     private final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
     private final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
     private String accessToken = token.getAccessToken();
@@ -52,6 +52,7 @@ public class SpotifyArtistInfo {
     	            String artistNameInfo = artist.getString("name");
     	            int followersCount = artist.getJSONObject("followers").getInt("total");
 
+    	            /*
     	            String genres;
     	            if (artist.has("genres") && artist.getJSONArray("genres").length() > 0) {
     	                List<Object> genresList = artist.getJSONArray("genres").toList();
@@ -61,7 +62,8 @@ public class SpotifyArtistInfo {
     	            } else {
     	                genres = "No genres available";
     	            }
-
+					*/
+						
     	            int popularity = artist.getInt("popularity");
 
     	            // Return Artist object

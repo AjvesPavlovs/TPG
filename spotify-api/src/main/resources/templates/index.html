@@ -11,17 +11,17 @@
 		<div class="container">
 			<form th:action=@{/redirect} method="post">
 	    	<h1>Spotify Artist Stats</h1>
-	    		<input type="text" id="artist-name" name="artist-name" th:text=${name} placeholder="Enter artist name">
+	    		<input type="text" id="artist-name" name="artist-name" placeholder="Enter artist name">
 	    		<button type="submit" id="search-btn" name="action">Search</button>
 	
 		    <div id="artist-info">
 		      	<h2>Artist Info:</h2>
-				      <p><strong>Name:</strong> <span id="artist-name-info" ></span></p>
+				      <p><strong>Name:</strong> <span id="artist-name-info" th:text=${name}></span></p>
 				      <p><strong>Followers:</strong> <span id="followers" th:text=${followers}></span></p>
 				      <p><strong>Genres:</strong> <span id="genres"></span></p>
 				      <p><strong>Popularity:</strong> <span id="popularity" th:text=${popularity}></span></p>
 			
-	    	</div>
+	    	</div>	 
 	    	</form>
 	  	</div>   
 	  

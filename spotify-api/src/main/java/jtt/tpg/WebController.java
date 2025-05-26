@@ -29,8 +29,9 @@ public class WebController {
     	System.out.println(artist.getFollowers());
     	int followers = artist.getFollowers();
     	int popularity = artist.getPopularity();
+    	String name = artist.getName();
     	
-        model.addAttribute("artist-name2", username);
+        model.addAttribute("name", name);
         model.addAttribute("followers", followers);
       //  model.addAttribute("genres", genres);
         model.addAttribute("popularity", popularity);
