@@ -30,10 +30,11 @@ public class WebController {
     	int followers = artist.getFollowers();
     	int popularity = artist.getPopularity();
     	String name = artist.getName();
+    	String genres = spotifyInfo.getArtistGenres(username);
     	
         model.addAttribute("name", name);
         model.addAttribute("followers", followers);
-      //  model.addAttribute("genres", genres);
+        model.addAttribute("genres", genres);
         model.addAttribute("popularity", popularity);
         return "index"; // Maps to index.html in templates folder
     }

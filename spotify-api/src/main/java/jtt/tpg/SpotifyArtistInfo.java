@@ -4,7 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;     
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -79,4 +80,74 @@ public class SpotifyArtistInfo {
     	        return null;
     	    }
     }
+    	public String getArtistGenres(String artistName) {
+    	    try {
+    	        
+    	        String searchUrl = "https://api.spotify.com/v1/search?q=" + URLEncoder.encode(artistName, "UTF-8") + "&type=artist&limit=1";
+    	        HttpURLConnection searchConnection = (HttpURLConnection) new URL(searchUrl).openConnection();
+    	        searchConnection.setRequestMethod("GET");
+    	        searchConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
+    	        searchConnection.setRequestProperty("Content-Type", "application/json");
+
+    	        int searchResponseCode = searchConnection.getResponseCode();
+    	        if (searchResponseCode != HttpURLConnection.HTTP_OK) {
+    	            System.out.println("Error searching artist: HTTP " + searchResponseCode);
+    	            return null;
+    	        }
+
+    	        BufferedReader searchIn = new BufferedReader(new InputStreamReader(searchConnection.getInputStream()));
+    	        StringBuilder searchResponse = new StringBuilder();
+    	        String inputLine;
+    	        while ((inputLine = searchIn.readLine()) != null) {
+    	            searchResponse.append(inputLine);
+    	        }
+    	        searchIn.close();
+
+    	        JSONObject searchJson = new JSONObject(searchResponse.toString());
+    	        JSONArray items = searchJson.getJSONObject("artists").getJSONArray("items");
+    	        if (items.length() == 0) {
+    	            return "Artist not found";
+    	        }
+
+    	        String artistId = items.getJSONObject(0).getString("id");
+
+    	        
+    	        String artistUrl = "https://api.spotify.com/v1/artists/" + artistId;
+    	        HttpURLConnection artistConnection = (HttpURLConnection) new URL(artistUrl).openConnection();
+    	        artistConnection.setRequestMethod("GET");
+    	        artistConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
+    	        artistConnection.setRequestProperty("Content-Type", "application/json");
+
+    	        int artistResponseCode = artistConnection.getResponseCode();
+    	        if (artistResponseCode != HttpURLConnection.HTTP_OK) {
+    	            System.out.println("Error fetching artist details: HTTP " + artistResponseCode);
+    	            return null;
+    	        }
+
+    	        BufferedReader artistIn = new BufferedReader(new InputStreamReader(artistConnection.getInputStream()));
+    	        StringBuilder artistResponse = new StringBuilder();
+    	        while ((inputLine = artistIn.readLine()) != null) {
+    	            artistResponse.append(inputLine);
+    	        }
+    	        artistIn.close();
+
+    	        JSONObject artistJson = new JSONObject(artistResponse.toString());
+    	     
+    	        JSONArray genresArray = artistJson.getJSONArray("genres");
+    	        
+    	        if (genresArray.length() > 0) {
+    	            List<Object> genresList = genresArray.toList();
+    	            return genresList.stream()
+    	                    .map(Object::toString)
+    	                    .collect(Collectors.joining(", "));
+    	        } else {
+    	            return "No genres available";
+    	        }
+
+    	    } catch (Exception e) {
+    	        e.printStackTrace();
+    	        return "Error: " + e.getMessage();
+    	    }
+    	}
+    	
 }
