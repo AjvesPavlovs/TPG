@@ -10,7 +10,7 @@ import jtt.tpg.dto.Genre;
 import jtt.tpg.repositories.GenreRepository;
 import jtt.tpg.dao.GenreDAO;
 
-//this class is made to describe methods that is saved in ArtistDAO 
+//this class is made to describe methods that is saved in GenreDAO 
 
 @Service
 public class GenreDAOImpl implements GenreDAO{

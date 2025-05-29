@@ -62,7 +62,4 @@ public class ArtistDAOImpl implements ArtistDAO{
 		Artist artistData = artistRepository.findById(artistRepository.findByName(name)).get();
 		return artistData;
 	}
-	
-
-
 }

@@ -36,21 +36,19 @@ public class ArtistGenre {
 		this.id = id;
 	}
 
-	public int getArtist_id() {
+	public int getArtistID() {
 		return artist_id;
 	}
 
-	public void setArtist_id(int artist_id) {
+	public void setArtistID(int artist_id) {
 		this.artist_id = artist_id;
 	}
 
-	public int getGenre_id() {
+	public int getGenreID() {
 		return genre_id;
 	}
 
-	public void setGenre_id(int genre_id) {
+	public void setGenreID(int genre_id) {
 		this.genre_id = genre_id;
 	}
-	
-	
 }
