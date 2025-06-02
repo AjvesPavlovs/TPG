@@ -18,12 +18,11 @@ import jtt.tpg.dto.Artist;
 
 public class SpotifyArtistInfo {
 	GetUserToken token = new GetUserToken();
-    private final String CLIENT_ID = "86759f103ae94b81b77230c3cfb039fa"; // Replace with your Spotify Client ID
-    private final String CLIENT_SECRET = "4cf53223fb55487686cd0ce1431cd854"; // Replace with your Spotify Client Secret
     private String accessToken = token.getAccessToken();
 
     // Function to fetch artist info from Spotify API
     	public Artist getArtistStats(String artistName) {
+    		accessToken = token.getAccessToken();
     	    try {
     	        String urlString = "https://api.spotify.com/v1/search?q=" + artistName + "&type=artist";
     	        URL url = new URL(urlString);
@@ -81,6 +80,7 @@ public class SpotifyArtistInfo {
     	    }
     }
     	public String getArtistGenres(String artistName) {
+    		accessToken = token.getAccessToken();
     	    try {
     	        
     	        String searchUrl = "https://api.spotify.com/v1/search?q=" + URLEncoder.encode(artistName, "UTF-8") + "&type=artist&limit=1";

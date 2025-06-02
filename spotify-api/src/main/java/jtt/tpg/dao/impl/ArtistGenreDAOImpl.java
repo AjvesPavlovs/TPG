@@ -42,7 +42,7 @@ public class ArtistGenreDAOImpl implements ArtistGenreDAO{
 
 	@Override
 	public int getID(ArtistGenre value) {
-		return agRepository.findByID(value.getArtistID(), value.getGenreID());
+		return agRepository.findID(value.getArtistID(), value.getGenreID());
 	}
 
 	@Override
