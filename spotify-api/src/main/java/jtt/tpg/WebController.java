@@ -28,7 +28,7 @@ public class WebController {
 	    SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
 	    Artist artist = spotifyInfo.getArtistStats(artistName);
 	    String genres = spotifyInfo.getArtistGenres(artistName);
-	    String imageURL = spotifyInfo.getArtistImage(artistName).get(0).getUrl();
+	    String imageURL = spotifyInfo.getArtistImages(artistName).get(0).getUrl();
 
 	    if (artist == null) {
 	        model.addAttribute("name", "Failed to fetch artist data. Please try again.");
