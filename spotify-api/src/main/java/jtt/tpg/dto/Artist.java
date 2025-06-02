@@ -8,8 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-//This class is needed to create artist object that saves info 
-
+/**
+ * This class is needed to create Artist object that saves info 
+ */
 @Entity
 @Table(name = "artists")
 public class Artist {
@@ -24,6 +25,13 @@ public class Artist {
 	
 	public Artist() {}
 
+	/**
+	 * 
+	 * Constructor
+	 * @param name - The name of the artist.
+	 * @param followers - The total number of followers.
+	 * @param popularity - The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular.
+	 */
 	public Artist(String name, int followers, int popularity) {
 		this.name = name;
 		this.followers = followers;

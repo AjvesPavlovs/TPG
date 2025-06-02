@@ -19,23 +19,30 @@ public class WebController {
 	
 	
 	
-    @PostMapping("/redirect")
-    public String artistInfo(@RequestParam(name="action") String action,
-    		@RequestParam(name="artist-name") String username, Model model) throws IOException {
-    	SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
-    	
-    	Artist artist = spotifyInfo.getArtistStats(username);
-    	System.out.println(artist.getName());
-    	System.out.println(artist.getFollowers());
-    	int followers = artist.getFollowers();
-    	int popularity = artist.getPopularity();
-    	String name = artist.getName();
-    	String genres = spotifyInfo.getArtistGenres(username);
-    	
-        model.addAttribute("name", name);
-        model.addAttribute("followers", followers);
-        model.addAttribute("genres", genres);
-        model.addAttribute("popularity", popularity);
-        return "index"; // Maps to index.html in templates folder
-    }
+	@PostMapping("/redirect")
+	public String artistInfo(
+	    @RequestParam(name="action") String action,
+	    @RequestParam(name="artist-name") String artistName, 
+	    Model model
+	) throws IOException {
+	    SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
+	    Artist artist = spotifyInfo.getArtistStats(artistName);
+	    String genres = spotifyInfo.getArtistGenres(artistName);
+	    String imageURL = spotifyInfo.getArtistImage(artistName).get(0).getUrl();
+
+	    if (artist == null) {
+	        model.addAttribute("name", "Failed to fetch artist data. Please try again.");
+	        return "index";
+	    }
+
+	   
+	    model.addAttribute("name", artist.getName());
+	    model.addAttribute("followers", artist.getFollowers());
+	    model.addAttribute("genres", genres);
+	    model.addAttribute("popularity", artist.getPopularity() + "%");
+	    
+	    model.addAttribute("imageURL", imageURL);
+
+	    return "index";
+	}
 }

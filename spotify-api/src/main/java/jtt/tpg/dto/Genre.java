@@ -6,7 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-//This class is needed to create artist object that saves info 
+/**
+ * This class is needed to create Genre object that saves info 
+ */
 
 @Entity
 @Table(name = "genres")
@@ -20,6 +22,11 @@ public class Genre {
 	
 	public Genre() {}
 	
+	/**
+	 * 
+	 * Constructor
+	 * @param name - genre name
+	 */
 	public Genre(String name) {this.name = name;}
 
 	public int getId() {return id;}
