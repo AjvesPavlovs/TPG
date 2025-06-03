@@ -38,15 +38,14 @@ public class WebController {
 	    String genres = spotifyInfo.getArtistGenres(artistName);
 	    String imageURL = spotifyInfo.getArtistImages(artistName).get(0).getUrl();
 	    
-	    artistDAO.insert(artist);
-	    
+	    if(artistDAO.insert(artist) != null) {
 	    if(!genres.equals("No genres available")) {
 	    for (String genre : genres.split(", ")) {
-	    	Genre genreObject = new Genre(genre);
-	    	genreDAO.insert(genreObject);
+	    	genreDAO.insert(new Genre(genre));
+	    	agDAO.insert(new ArtistGenre(artist.getId(), genreDAO.getID(new Genre(genre))));
 	    	
-	    	agDAO.insert(new ArtistGenre(artist.getId(), genreObject.getId()));
-		}}
+	    	
+		}}}
 
 	    if (artist == null) {
 	        model.addAttribute("name", "Failed to fetch artist data. Please try again.");
