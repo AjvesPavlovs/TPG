@@ -10,7 +10,7 @@
 <body>
   <!-- Logo in top-left -->
   <img src="TPGfy_logo.png" alt="Spotify Logo" class="logo" />
-<div class="mainInfo">
+
   <div class="container">
     <form th:action="@{/redirect}" method="post">
       <h1>Spotify Artist Stats</h1>
@@ -43,15 +43,6 @@
     </select>
     <input type="hidden" name="action" value="search" />
   </form>
-</div>
-</div>
-
-<div class="tracks">
-	<div class="track">
-	<div class="trackImage"><img   class="trackImage" alt="ads" th:src="${trackImageURL}" ></div>
-	<div class="trackName"><h2 th:text="${trackName}"></h2></div>
-	<div class="artists"><p th:text="${trackArtists}"></p> </div>
-	</div>
 </div>
 
 </body>

@@ -17,6 +17,7 @@ import jtt.tpg.dao.GenreDAO;
 import jtt.tpg.dto.Artist;
 import jtt.tpg.dto.ArtistGenre;
 import jtt.tpg.dto.Genre;
+import jtt.tpg.dto.Track;
 
 @Controller
 public class WebController {
@@ -70,6 +71,17 @@ public class WebController {
 				artistNames.add(i.getName());
 			}
 		    model.addAttribute("dropdownItems", artistNames);
+		    
+		    
+		   List<Track> tracks = spotifyInfo.getArtistsTopTracks(artistName);
+		   String artistsString = "";
+		   for (String trackArtist : tracks.get(0).getArtists()) {
+			   artistsString += trackArtist + ", ";
+		}
+		   System.out.println(tracks.get(0).getAlbumImgURL());
+		   model.addAttribute("trackImageURL", tracks.get(0).getAlbumImgURL());
+		   model.addAttribute("trackName", tracks.get(0).getName());
+		   model.addAttribute("trackArtists", artistsString);
 
 	    return "index";
 	}

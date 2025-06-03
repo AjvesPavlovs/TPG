@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import jtt.tpg.dto.Artist;
 import jtt.tpg.dto.Image;
+import jtt.tpg.dto.Track;
 
 public class SpotifyArtistInfo {
 	private GetUserToken token = new GetUserToken();
@@ -115,12 +116,11 @@ public class SpotifyArtistInfo {
          *  @param artistName - String data type
          *  @return List<Track> tracks
          */
-    	public List<Image> getArtistTopTracks(String artistName) {
-accessToken = token.getAccessToken();
-    		
-    		artistName = artistName.replace(' ', '-');  
+    	public List<Track> getArtistsTopTracks(String artistName) {
+    	    accessToken = token.getAccessToken();
+    	    String countryCode = "ES";
+    	    artistName = artistName.replace(' ', '-');  
     	    try {
-    	        
     	        String searchUrl = "https://api.spotify.com/v1/search?q=" + URLEncoder.encode(artistName, "UTF-8") + "&type=artist&limit=1";
     	        HttpURLConnection searchConnection = (HttpURLConnection) new URL(searchUrl).openConnection();
     	        searchConnection.setRequestMethod("GET");
@@ -149,31 +149,58 @@ accessToken = token.getAccessToken();
 
     	        String artistId = items.getJSONObject(0).getString("id");
 
-    	        
-    	        String artistUrl = "https://api.spotify.com/v1/artists/" + artistId;
-    	        HttpURLConnection artistConnection = (HttpURLConnection) new URL(artistUrl).openConnection();
-    	        artistConnection.setRequestMethod("GET");
-    	        artistConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
-    	        artistConnection.setRequestProperty("Content-Type", "application/json");
+    	        // Now get the artist's top tracks
+    	        String topTracksUrl = "https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?market=" + countryCode;
+    	        HttpURLConnection tracksConnection = (HttpURLConnection) new URL(topTracksUrl).openConnection();
+    	        tracksConnection.setRequestMethod("GET");
+    	        tracksConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
+    	        tracksConnection.setRequestProperty("Content-Type", "application/json");
 
-    	        int artistResponseCode = artistConnection.getResponseCode();
-    	        if (artistResponseCode != HttpURLConnection.HTTP_OK) {
-    	            System.out.println("Error fetching artist details: HTTP " + artistResponseCode);
+    	        int tracksResponseCode = tracksConnection.getResponseCode();
+    	        if (tracksResponseCode != HttpURLConnection.HTTP_OK) {
+    	            System.out.println("Error fetching artist's top tracks: HTTP " + tracksResponseCode);
     	            return null;
     	        }
 
-    	        BufferedReader artistIn = new BufferedReader(new InputStreamReader(artistConnection.getInputStream()));
-    	        StringBuilder artistResponse = new StringBuilder();
-    	        while ((inputLine = artistIn.readLine()) != null) {
-    	            artistResponse.append(inputLine);
+    	        BufferedReader tracksIn = new BufferedReader(new InputStreamReader(tracksConnection.getInputStream()));
+    	        StringBuilder tracksResponse = new StringBuilder();
+    	        while ((inputLine = tracksIn.readLine()) != null) {
+    	            tracksResponse.append(inputLine);
     	        }
-    	        artistIn.close();
+    	        tracksIn.close();
     	        
-    	        System.out.println(artistResponse.toString());
+    	        // System.out.println(tracksResponse.toString());
 
-    	        JSONObject artistJson = new JSONObject(artistResponse.toString());
+    	        JSONObject response = new JSONObject(tracksResponse.toString());
     	        
-    	        return null;
+    	        JSONArray trackArray = response.getJSONArray("tracks");
+    	        
+    	        List<Track> tracks = new ArrayList<>();
+    	        for (int i = 0; i < trackArray.length(); i++) {
+    	            JSONObject trackJSon = trackArray.getJSONObject(i);
+    	            String name = trackJSon.getString("name");
+    	            int duration = trackJSon.getInt("duration_ms");
+    	            int popularity = trackJSon.getInt("popularity");
+    	            String uri = trackJSon.getString("uri");
+    	            
+    	            List<String> artists = new ArrayList<String>();
+    	            JSONArray artistArray = trackJSon.getJSONArray("artists");
+    	            for (int j = 0; j < artistArray.length(); j++) {
+    	            	 JSONObject artistJson = artistArray.getJSONObject(j);
+
+    	    	            String artistNameInfo = artistJson.getString("name");
+    	    	           
+    	    	            artists.add(artistNameInfo);
+    	            }
+    	            
+    	            String albumName = trackJSon.getJSONObject("album").getString("name");
+    	            String albumReleaseDate = trackJSon.getJSONObject("album").getString("release_date");
+    	            String albumImgURL = trackJSon.getJSONObject("album").getJSONArray("images").getJSONObject(1).getString("url");
+    	            tracks.add(new Track(name, artists, duration, popularity, uri, albumName, albumImgURL, albumReleaseDate));
+    	        }
+
+    	        if(tracks.isEmpty()) return null;
+    	        return tracks;
 
     	    } catch (Exception e) {
     	        e.printStackTrace();
