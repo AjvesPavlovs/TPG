@@ -1,10 +1,13 @@
 package jtt.tpg;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,8 +28,18 @@ public class WebController {
 	@Autowired
 	ArtistGenreDAO agDAO;
 	
-	
-	
+	@GetMapping("/form")
+	public String showForm(
+		    @RequestParam(name="action") String action, Model model) {
+	    List<Artist> artists = artistDAO.getAllData();
+	    
+	    List<String> artistNames = new ArrayList<>();
+	    for (Artist artist : artists) {
+			artistNames.add(artist.getName());
+		}
+	    model.addAttribute("artists", artistNames);
+	    return "form";
+	}
 	@PostMapping("/redirect")
 	public String artistInfo(
 	    @RequestParam(name="action") String action,
