@@ -35,12 +35,11 @@
   <!-- Dropdown moved below artist info -->
   <div class="dropdown-below">
     <label for="previous-artists">Choose previous artist:</label><br />
-	    <select id="previous-artists">
-			<form th:action="@{/form}" method="get">
-	  		<th:block th:each="item : ${dropdownItems}">
-	    		<option th:value="${item}" th:text="${item}"></option>
-	  		</th:block>
-		</select>
+    <select id="previous-artists">
+      <option value="artist1">Artist 1</option>
+      <option value="artist2">Artist 2</option>
+      <option value="artist3">Artist 3</option>
+    </select>
   </div>
 
 </body>
