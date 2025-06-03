@@ -33,15 +33,17 @@
   </div>
 
   <!-- Dropdown moved below artist info -->
-  <div class="dropdown-below">
-    <label for="previous-artists">Choose previous artist:</label><br />
-	    <select id="previous-artists">
-			<form th:action="@{/form}" method="get">
-	  		<th:block th:each="item : ${dropdownItems}">
-	    		<option th:value="${item}" th:text="${item}"></option>
-	  		</th:block>
-		</select>
-  </div>
+ <div class="dropdown-below">
+  <label for="previous-artists">Choose previous artist:</label><br />
+  <form id="previous-artist-form" th:action="@{/redirect}" method="post">
+    <select id="previous-artists" name="artist-name" onchange="this.form.submit()">
+      <th:block th:each="item : ${dropdownItems}">
+        <option th:value="${item}" th:text="${item}"></option>
+      </th:block>
+    </select>
+    <input type="hidden" name="action" value="search" />
+  </form>
+</div>
 
 </body>
 </html>

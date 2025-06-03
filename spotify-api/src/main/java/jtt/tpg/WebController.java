@@ -28,24 +28,14 @@ public class WebController {
 	@Autowired
 	ArtistGenreDAO agDAO;
 	
-	@GetMapping("/form")
-	public String showForm(
-		    @RequestParam(name="action") String action, Model model) {
-	    List<Artist> artists = artistDAO.getAllData();
-	    
-	    List<String> artistNames = new ArrayList<>();
-	    for (Artist artist : artists) {
-			artistNames.add(artist.getName());
-		}
-	    model.addAttribute("artists", artistNames);
-	    return "form";
-	}
+
 	@PostMapping("/redirect")
 	public String artistInfo(
-	    @RequestParam(name="action") String action,
-	    @RequestParam(name="artist-name") String artistName, 
-	    Model model
+		@RequestParam(name="action", required=false, defaultValue="search") String action,
+		@RequestParam(name="artist-name") String artistName, 
+		Model model
 	) throws IOException {
+		
 	    SpotifyArtistInfo spotifyInfo = new SpotifyArtistInfo();
 	    Artist artist = spotifyInfo.getArtistStats(artistName);
 	    String genres = spotifyInfo.getArtistGenres(artistName);
@@ -57,6 +47,7 @@ public class WebController {
 	    	genreDAO.insert(new Genre(genre));
 	    	agDAO.insert(new ArtistGenre(artist.getId(), genreDAO.getID(new Genre(genre))));
 	    	
+
 	    	
 		}}}
 
@@ -65,12 +56,20 @@ public class WebController {
 	        return "index";
 	    }
 
-	   
 	    model.addAttribute("name", artist.getName());
 	    model.addAttribute("followers", artist.getFollowers());
 	    model.addAttribute("genres", genres);
 	    model.addAttribute("popularity", artist.getPopularity() + "%");
 	    model.addAttribute("imageURL", imageURL);
+	    
+	    
+		 List<Artist> artists = artistDAO.getAllData();
+		    
+		    List<String> artistNames = new ArrayList<>();
+		    for (Artist i : artists) {
+				artistNames.add(i.getName());
+			}
+		    model.addAttribute("dropdownItems", artistNames);
 
 	    return "index";
 	}

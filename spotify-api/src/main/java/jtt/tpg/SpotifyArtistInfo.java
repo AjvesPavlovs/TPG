@@ -81,7 +81,6 @@ public class SpotifyArtistInfo {
          *  Function to fetch artist images from Spotify API
          *  @param artistName - String data type
          *  @return List<Image> images 
-         *  @return null if not founded
          */
     	public List<Image> getArtistImages(String artistName) {
 
@@ -242,7 +241,7 @@ accessToken = token.getAccessToken();
     	        }
     	        artistIn.close();
     	        
-    	        System.out.println(artistResponse.toString());
+    	      //  System.out.println(artistResponse.toString());
 
     	        return new JSONObject(artistResponse.toString());
 
