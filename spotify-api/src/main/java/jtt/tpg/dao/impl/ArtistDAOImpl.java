@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jtt.tpg.dao.ArtistDAO;
 import jtt.tpg.dto.Artist;
+import jtt.tpg.dto.Genre;
 import jtt.tpg.repositories.ArtistRepository;
 
 //this class is made to describe methods that is saved in ArtistDAO 
@@ -20,6 +21,9 @@ public class ArtistDAOImpl implements ArtistDAO{
 
 	@Override
 	public Artist insert(Artist value) {
+		for (Artist existingArtist : this.getAllData()) {
+			if(existingArtist.getName().equals(value.getName())) return null;	
+		}
 		return artistRepository.save(value);
 	}
 

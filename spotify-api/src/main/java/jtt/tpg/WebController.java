@@ -9,13 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jtt.tpg.dao.ArtistDAO;
+import jtt.tpg.dao.ArtistGenreDAO;
+import jtt.tpg.dao.GenreDAO;
 import jtt.tpg.dto.Artist;
+import jtt.tpg.dto.ArtistGenre;
+import jtt.tpg.dto.Genre;
 
 @Controller
 public class WebController {
 	
 	@Autowired
 	ArtistDAO artistDAO;
+	@Autowired
+	GenreDAO genreDAO;
+	@Autowired
+	ArtistGenreDAO agDAO;
 	
 	
 	
@@ -29,6 +37,16 @@ public class WebController {
 	    Artist artist = spotifyInfo.getArtistStats(artistName);
 	    String genres = spotifyInfo.getArtistGenres(artistName);
 	    String imageURL = spotifyInfo.getArtistImages(artistName).get(0).getUrl();
+	    
+	    artistDAO.insert(artist);
+	    
+	    if(!genres.equals("No genres available")) {
+	    for (String genre : genres.split(", ")) {
+	    	Genre genreObject = new Genre(genre);
+	    	genreDAO.insert(genreObject);
+	    	
+	    	agDAO.insert(new ArtistGenre(artist.getId(), genreObject.getId()));
+		}}
 
 	    if (artist == null) {
 	        model.addAttribute("name", "Failed to fetch artist data. Please try again.");
@@ -40,7 +58,6 @@ public class WebController {
 	    model.addAttribute("followers", artist.getFollowers());
 	    model.addAttribute("genres", genres);
 	    model.addAttribute("popularity", artist.getPopularity() + "%");
-	    
 	    model.addAttribute("imageURL", imageURL);
 
 	    return "index";

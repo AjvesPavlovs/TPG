@@ -13,4 +13,6 @@ CREATE TABLE IF NOT EXISTS spotifyapi.artists(
     	CREATE TABLE IF NOT EXISTS spotifyapi.artist_genres(
     id INT AUTO_INCREMENT PRIMARY KEY,
     artist_id INT NOT NULL,
-    genre_id INT NOT NULL);
+    genre_id INT NOT NULL,
+    CONSTRAINT fk_artists_genres_artists FOREIGN KEY(artist_id) REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_genres_genres_artists FOREIGN KEY(genre_id) REFERENCES genres(id) ON UPDATE CASCADE ON DELETE CASCADE);

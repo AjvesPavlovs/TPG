@@ -20,6 +20,9 @@ public class GenreDAOImpl implements GenreDAO{
 	
 	@Override
 	public Genre insert(Genre value) {
+		for (Genre existingGenre : this.getAllData()) {
+			if(existingGenre.getName().equals(value.getName())) return null;	
+		}
 		return genreRepository.save(value);
 	}
 

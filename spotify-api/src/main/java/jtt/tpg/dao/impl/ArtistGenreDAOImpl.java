@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import jtt.tpg.dao.ArtistGenreDAO;
 import jtt.tpg.dto.ArtistGenre;
-import jtt.tpg.dto.Genre;
 import jtt.tpg.repositories.ArtistGenreRepository;
 
 //this class is made to describe methods that is saved in GenreDAO 
@@ -21,6 +20,9 @@ public class ArtistGenreDAOImpl implements ArtistGenreDAO{
 	
 	@Override
 	public ArtistGenre insert(ArtistGenre value) {
+		for (ArtistGenre existingAG : this.getAllData()) {
+			if(existingAG.getArtistID() == value.getArtistID() && existingAG.getGenreID() == value.getGenreID()) return null;	
+		}
 		return agRepository.save(value);
 	}
 
