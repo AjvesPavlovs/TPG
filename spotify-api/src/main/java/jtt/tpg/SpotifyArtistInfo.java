@@ -182,7 +182,7 @@ public class SpotifyArtistInfo {
     	            int duration = trackJSon.getInt("duration_ms");
     	            int popularity = trackJSon.getInt("popularity");
     	            String uri = trackJSon.getString("uri");
-    	            
+    	            System.out.println(uri);
     	            List<String> artists = new ArrayList<String>();
     	            JSONArray artistArray = trackJSon.getJSONArray("artists");
     	            for (int j = 0; j < artistArray.length(); j++) {

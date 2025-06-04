@@ -74,14 +74,7 @@ public class WebController {
 		    
 		    
 		   List<Track> tracks = spotifyInfo.getArtistsTopTracks(artistName);
-		   String artistsString = "";
-		   for (String trackArtist : tracks.get(0).getArtists()) {
-			   artistsString += trackArtist + ", ";
-		}
-		   System.out.println(tracks.get(0).getAlbumImgURL());
-		   model.addAttribute("trackImageURL", tracks.get(0).getAlbumImgURL());
-		   model.addAttribute("trackName", tracks.get(0).getName());
-		   model.addAttribute("trackArtists", artistsString);
+		    model.addAttribute("tracks", tracks);
 
 	    return "index";
 	}
