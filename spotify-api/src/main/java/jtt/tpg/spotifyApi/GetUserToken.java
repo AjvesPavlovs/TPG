@@ -1,11 +1,6 @@
-package jtt.tpg;
+package jtt.tpg.spotifyApi;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.util.Base64;
 
 import org.json.JSONObject;
@@ -15,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 //Class is used to get Access Token, if it is expired
 public class GetUserToken {

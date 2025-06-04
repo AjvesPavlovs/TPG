@@ -1,4 +1,4 @@
-package jtt.tpg;
+package jtt.tpg.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +17,7 @@ import jtt.tpg.dto.Artist;
 import jtt.tpg.dto.ArtistGenre;
 import jtt.tpg.dto.Genre;
 import jtt.tpg.dto.Track;
+import jtt.tpg.spotifyApi.SpotifyArtistInfo;
 
 @Controller
 public class WebController {

@@ -1,6 +1,6 @@
 package jtt.tpg.dto;
 /**
- * This class is needed to create Image object that saves info, won't be saved in DB
+ * This class is needed to create Image object that saves info
  * @value url - url of image
  * @value width - width of image
  * @value height - height of image

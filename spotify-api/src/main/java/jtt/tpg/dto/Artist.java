@@ -1,6 +1,5 @@
 package jtt.tpg.dto;
 
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

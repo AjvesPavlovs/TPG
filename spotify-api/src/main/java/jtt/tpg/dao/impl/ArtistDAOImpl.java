@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import jtt.tpg.dao.ArtistDAO;
 import jtt.tpg.dto.Artist;
-import jtt.tpg.dto.Genre;
 import jtt.tpg.repositories.ArtistRepository;
 
 //this class is made to describe methods that is saved in ArtistDAO 
